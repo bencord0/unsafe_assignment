@@ -1,0 +1,19 @@
+name: unsafe-assignment
+version: 1.1.0.5
+
+dependencies:
+  - base
+  - random
+
+library:
+  exposed-modules: UnsafeAssignment
+  source-dirs: src
+  ghc-options: -Wall
+
+executables:
+  unsafe-assignment-exe:
+    main:                Main.hs
+    source-dirs:         app
+    dependencies:
+    - unsafe-assignment
+
