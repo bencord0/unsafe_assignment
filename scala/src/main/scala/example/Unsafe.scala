@@ -1,6 +1,7 @@
 package example
 import scala.util.Random
-import scala.concurrent.Future
+import scala.concurrent.{Future, Await}
+import scala.concurrent.duration.Duration
 object Unsafe extends App {
   implicit val ec: scala.concurrent.ExecutionContext = scala.concurrent.ExecutionContext.global
   var a: Int = 0;
@@ -12,9 +13,7 @@ object Unsafe extends App {
   }
   val f1 = maybeSlowAssignment(1)
   val f2 = maybeSlowAssignment(2)
-  f1.onComplete { case _ =>
-    f2.onComplete { case _ =>
-      println(a)
-    }
-  }
+  Await.ready(f1, Duration.Inf)
+  Await.ready(f2, Duration.Inf)
+  println(a)
 }
